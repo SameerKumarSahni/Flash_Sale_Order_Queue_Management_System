@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Flash Sale Order Queue Management System — a DSA project demonstrating Queue, Priority Queue, Stack, and Hash Table in a real-world e-commerce simulation." />
+  <title>Flash Sale Queue — DSA Order Management</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────────────────────────── -->
+  <header class="header">
+    <h1>⚡ <span class="flash">Flash Sale</span> Order Queue System</h1>
+    <p class="subtitle">Data Structures &amp; Algorithms — Queue · Priority Queue · Stack · Hash Table</p>
+    <span class="badge">DSA-I Interactive Demo</span>
+  </header>
+
+  <div class="container">
+
+    <!-- ─── Input Form ──────────────────────────────────────────────────────── -->
+    <section class="form-card" id="formSection">
+      <h2>📋 New Order</h2>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="orderId">Order ID</label>
+          <input type="text" id="orderId" placeholder="e.g. ORD-101" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="customerName">Customer Name</label>
+          <input type="text" id="customerName" placeholder="e.g. Aarav Sharma" autocomplete="off" />
+        </div>
+        <div class="form-group">
+          <label for="orderType">Order Type</label>
+          <select id="orderType">
+            <option value="normal">🛒 Normal Order</option>
+            <option value="vip">⭐ VIP Order</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-blue"   id="btnAddOrder"   onclick="addOrder()">🛒 Add Order</button>
+        <button class="btn btn-red"    id="btnAddVip"     onclick="addVipOrder()">⭐ Add VIP Order</button>
+        <button class="btn btn-green"  id="btnProcess"    onclick="processOrder()">▶ Process Order</button>
+        <button class="btn btn-yellow" id="btnUndo"       onclick="undoOrder()">↩ Undo Last</button>
+      </div>
+    </section>
+
+    <!-- ─── Data Structure Cards ────────────────────────────────────────────── -->
+    <section class="ds-grid" id="dsGrid">
+
+      <!-- Normal Queue (Blue) -->
+      <div class="ds-card queue" id="cardQueue">
+        <div class="accent"></div>
+        <div class="card-header">
+          <div class="icon">📥</div>
+          <h3>Normal Queue</h3>
+          <span class="count" id="normalCount">0</span>
+        </div>
+        <p class="edu-note">🧠 Queue follows <strong>FIFO</strong> — First In, First Out. Orders are processed in the order they arrive.</p>
+        <ul class="items" id="normalList">
+          <li class="empty-msg">Queue is empty</li>
+        </ul>
+      </div>
+
+      <!-- VIP Priority Queue (Red) -->
+      <div class="ds-card priority" id="cardPriority">
+        <div class="accent"></div>
+        <div class="card-header">
+          <div class="icon">🔥</div>
+          <h3>VIP Priority Queue</h3>
+          <span class="count" id="vipCount">0</span>
+        </div>
+        <p class="edu-note">🧠 Priority Queue processes <strong>VIP orders first</strong>, using a min-heap. Higher-priority items are dequeued before normal orders.</p>
+        <ul class="items" id="vipList">
+          <li class="empty-msg">No VIP orders</li>
+        </ul>
+      </div>
+
+      <!-- Processed Stack (Green) -->
+      <div class="ds-card stack" id="cardStack">
+        <div class="accent"></div>
+        <div class="card-header">
+          <div class="icon">✅</div>
+          <h3>Processed (Stack)</h3>
+          <span class="count" id="stackCount">0</span>
+        </div>
+        <p class="edu-note">🧠 Stack follows <strong>LIFO</strong> — Last In, First Out. The most recently processed order is on top and can be undone.</p>
+        <ul class="items" id="stackList">
+          <li class="empty-msg">No processed orders yet</li>
+        </ul>
+      </div>
+
+      <!-- Hash Table Lookup (Yellow) -->
+      <div class="ds-card hash" id="cardHash">
+        <div class="accent"></div>
+        <div class="card-header">
+          <div class="icon">🔍</div>
+          <h3>Order Lookup</h3>
+          <span class="count"><span class="tag" style="font-size:.65rem;letter-spacing:.5px;">HASH TABLE</span></span>
+        </div>
+        <p class="edu-note">🧠 Hash Table provides <strong>O(1)</strong> average-time lookup. Search any order by ID instantly using a dictionary.</p>
+        <div style="padding:14px 20px 20px;">
+          <div class="lookup-row">
+            <input type="text" id="lookupInput" placeholder="Enter Order ID…" autocomplete="off" />
+            <button class="btn btn-yellow" onclick="lookupOrder()">Search</button>
+          </div>
+          <div class="lookup-result" id="lookupResult"></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ─── Processing Log ──────────────────────────────────────────────────── -->
+    <section class="log-section" id="logSection">
+      <h2><span class="dot"></span> Processing Log</h2>
+      <div class="log-list" id="logList">
+        <div class="log-entry">System initialised — ready for flash sale orders.</div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ─── Footer ──────────────────────────────────────────────────────────── -->
+  <footer class="footer">
+    <span>⚡ Flash Sale Queue</span> — DSA-I Project &copy; 2025 &middot; Queue · Priority Queue · Stack · Hash Table
+  </footer>
+
+  <!-- ─── Toast ───────────────────────────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
